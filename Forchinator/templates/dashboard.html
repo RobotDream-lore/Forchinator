@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+{%load static%}
+
+<html>
+
+    <head >
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=yes">
+        <title>Giuditta 0.1</title>
+        <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'assets/css/styles.css'%}">
+        <link rel="stylesheet" href="{% static 'assets/css/input.css'%}">
+        <link rel="stylesheet" href="{% static 'assets/css/bootstrap4-toggle.min.css'%}">
+
+        <script src="{% static 'assets/js/jquery.min.js'%}"></script>
+        <script src="{% static 'assets/js/jquery-ui.min.js'%}"></script>
+        <script src="{% static 'assets/bootstrap/js/bootstrap.min.js'%}"></script>
+        <script src="{% static 'assets/js/bootstrap4-toggle.min.js'%}"></script>
+
+        <script src="{% static 'assets/js/forkinator.js'%}"></script>
+        
+        
+    </head>
+
+    <body class="bg-tag-light">
+        
+        <nav class="navbar navbar-dark navbar-expand-sm fixed-top bg-tag text-center">
+            <div class="container-fluid"><a class="navbar-brand" href="/index">TAG</a><button data-toggle="collapse" data-target="#navcol-1" class="navbar-toggler"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse"
+                    id="navcol-1">
+                    <ul class="nav navbar-nav">
+                        <li role="presentation" class="nav-item"><a class="nav-link active" href="/dashboard">Dashboard</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav ml-auto">
+                        <li role="presentation" class="nav-item"><a class="nav-link active" href="/settings">Settings</a></li>
+
+                      <li role="presentation" class="nav-item"><a class="nav-link active" href="/login">LogIn</a></li>
+                      <li role="presentation" class="nav-item"><a class="nav-link active" href="/logout">LogOut</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        
+
+        <div class="container-fluid" style="margin-top: 80px;">
+            <label for="nome_posizione">Position Name</label>
+            <input type="text" style="width: 100%" id="nome_posizione">
+        </div>
+        
+
+        <div class="container-fluid" style="margin-top: 80px;">
+            <div class="row" >
+                <div class="col">
+                    <label for="motore1">Motor One Steps</label>
+                    <input type="number" min="0" max="10000" value="0" id="motore1" style="width: 100%"></input>
+                </div>
+
+                <div class="col">
+                    <label for="motore2">Motor Two Steps</label>
+                    <input type="number" min="0" max="10000" value="0" id="motore2" style="width: 100%"></input>
+                </div>
+
+                <div class="col">
+                    <label for="motore3">Motor Three Steps</label>
+                    <input type="number" min="0" max="10000" value="0" id="motore3" style="width: 100%"></input>
+                </div>
+
+                <div class="col">
+                    <label for="motore4">Motor Four Steps</label>
+                    <input type="number" min="0" max="10000" value="0" id="motore4" style="width: 100%"></input>
+                </div>
+                
+            </div>
+        </div>
+
+        <div class="container-fluid" style="margin-top: 80px;">
+            <div class="row">
+                <div class="col">
+                    <label for="mode">Mode</label>
+                    <select id="mode" class="form-control" style="width: 100%; text-align: center; font-size: 2em">
+                        <option id="1" value="SP">SP</option>
+                        <option id="2" value="other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="col">
+                    <label for="homing">Homing</label>
+                    <input type="number" min="0" max="100" value="0" id="homing" style="width: 100%"></input>
+                </div>
+
+                <div class="col">
+                    <label for="speed">Speed</label>
+                    <input type="number" min="0" max="100" value="0" id="speed" style="width: 100%"></input>
+                </div>
+
+                <div class="col">
+                    <label for="delay">Delay</label>
+                    <input type="number" min="0" max="100" value="0" id="delay" style="width: 100%"></input>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid" style="margin-top: 80px;">
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <div class="col">
+                            <div><label for="wait1" style="vertical-align: top;">Wait 1</label></div>
+                            <input type="checkbox" data-toggle="toggle" id="wait1">
+                        </div>
+
+                        <div class="col">
+                            <div><label for="wait2" style="vertical-align: top;">Wait 2</label></div>
+                            <input type="checkbox" data-toggle="toggle" id="wait2">
+                        </div>
+                    </div>
+                </div>
+            
+
+                <div class="col">
+                    <div class="row">
+                        <div class="col">
+                            <div><label for="succhiare" style="vertical-align: top;">Action 1</label></div>
+                            <input type="checkbox" data-toggle="toggle" id="succhiare">
+                        </div>
+
+                        <div class="col">
+                            <div><label for="girare" style="vertical-align: top;">Action 2</label></div>
+                            <input type="checkbox" data-toggle="toggle" id="girare">
+                        </div>
+                    </div>    
+                </div>
+
+                <div class="col">
+                    <button id="try" class="btn btn-tag" type="button" style="width: 100%; font-size: 2em">Try Position</button>
+                </div>
+
+                <div class="col">
+                    <button id="add" class="btn btn-tag" type="button" style="width: 100%; font-size: 2em;">Add To Routine</button>
+                </div>
+            </div>
+
+        </div>
+        
+        <script>
+            $( function() {
+                $( "#routine" ).sortable();
+                $( "#routine" ).disableSelection();
+            } );
+        </script>
+
+        <div class="container-fluid" style="margin-top: 80px;">
+            <div class="row">
+                <div class="col">
+                    <label for="routine">Routine:</label>
+                    <ul id="routine" class="list-group" style="width: 100%;">
+                        <div class="row">
+                            <div class="col">
+                                <li class="list-group-item">Item 1</li>
+                            </div>
+
+                            <div class="col">
+                                <button id="edit" class="btn btn-tag" type="button" style="width: 50%; font-size: 1.2em; margin-top: 0;">edit</button>
+                            </div>
+            
+                            <div class="col">
+                                <button id="delete" class="btn btn-tag" type="button" style="width: 50%; font-size: 1.2em; margin-top: 0;">delete</button>
+                            </div>
+                        </div>
+                        
+                        <li class="list-group-item">Item 2</li>
+                        <li class="list-group-item">Item 3</li>
+                    </ul>                    
+                </div>         
+            </div>  
+        </div>
+
+        <div class="container-fluid" style="margin-bottom: 100px;">
+            <div class="row">
+                <div class="col">
+                    <button id="save" class="btn btn-tag" type="button" style="width: 100%; font-size: 2em;">Save Routine</button>
+                </div>
+
+                <div class="col">
+                    <button id="try-routine" class="btn btn-tag" type="button" style="width: 100%; font-size: 2em;">Try Routine</button>
+                </div>
+            </div>
+        </div>
+        
+
+    </body>
+</html>
