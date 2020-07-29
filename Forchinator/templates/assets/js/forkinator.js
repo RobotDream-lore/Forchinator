@@ -136,7 +136,7 @@ function saveAction()
         let form = document.getElementById("action-form");
         for(let i = 0; i <= form.length; i++)
         {
-            console.log(form[i].id + ": " + form[i].value);
+            //console.log(form[i].id + ": " + form[i].value);
             let _tmp_name = form[i].id;
             let _tmp_val = form[i].value;
 
