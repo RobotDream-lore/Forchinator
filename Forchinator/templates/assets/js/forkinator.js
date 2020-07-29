@@ -29,7 +29,16 @@ function fetchRoutineList()
         type: 'get',
         success: function(data){
             // Perform operation on return value
-            console.log(data);
+            //console.log(data);
+            let _select = document.getElementById('drop-routines');
+
+            for(let i = 0; i < data.length; i++)
+            {
+                let option = document.createElement("option");
+                option.text= data[i];
+                _select.add(option);
+            }
+            
         },
         complete:function(data){
             console.log("complete: fetchRoutineList");
@@ -71,25 +80,41 @@ function addRoutine()
     let _name;
     try{
         _name = document.getElementById('routine-name');
-        console.log(_name.value);
+        //console.log(_name.value);
         _name = _name.value;
     }catch(e){}
 
-    $.ajax({
-        url: '/dashboard/routines/save/' + _name,
-        dataType: 'json',
-        type: 'get',
-        success: function(data){
-            // Perform operation on return value
-            console.log(data);
-        },
-        complete:function(data){
-            console.log("complete: fetchActionList");
-        }
-    });
+    let data_to_send = [0, ''];
+
+    $.get('/dashboard/routines/save/' + _name + '/',{'data': data_to_send},location.reload());
 
 }
 function saveRoutine()
+{
+    let _name;
+    let _homing;
+    let data_to_send = [];
+    try{
+        _name = document.getElementById('drop-routines').value;
+        //console.log(_name.value);
+        
+        _homing = document.getElementById('homing').value;
+        //console.log(_homing);
+
+        data_to_send.push(_homing);
+        data_to_send.push('');
+
+    }catch(e){}
+    if(_name === undefined || _name === null) 
+    {
+        console.log("name is undefined or null");
+        console.log(_name);
+        return;
+    }
+    
+    $.get('/dashboard/routines/save/' + _name + '/',{'data': data_to_send}, console.log("complete: save Routine"));
+}
+function deleteRoutine()
 {
     let _name;
     try{
@@ -103,9 +128,48 @@ function saveRoutine()
         console.log(_name);
         return;
     }
-    let data_to_send = [];
-    data_to_send.push("52");
-    $.get('/dashboard/routines/save/' + _name + '/',{'data': data_to_send});
+       
+    $.ajax({
+        url: '/dashboard/routines/delete/' + _name,
+        dataType: 'json',
+        type: 'get',
+        success: function(){
+            // Perform operation on return value
+            console.log("delete routine Success");
+        },
+        complete:function(){
+            console.log("complete: delete routine");
+        }
+    });
+}
+
+function deleteAction()
+{
+    let _name;
+    try{
+        _name = document.getElementById('name');
+        //console.log(_name.value);
+        _name = _name.value;
+    }catch(e){}
+    if(_name === undefined || _name === null) 
+    {
+        console.log("name is undefined or null");
+        console.log(_name);
+        return;
+    }
+
+    $.ajax({
+        url: '/dashboard/actions/delete/' + _name,
+        dataType: 'json',
+        type: 'get',
+        success: function(){
+            // Perform operation on return value
+            console.log("delete action Success");
+        },
+        complete:function(){
+            console.log("complete: delete action");
+        }
+    });
 }
 
 function fetchActionList()
@@ -201,9 +265,9 @@ function saveAction()
         dataType: 'json',
         data: _action,
         type: 'post',
-        success: function(data){
+        success: function(){
             // Perform operation on return value
-            console.log(data);
+            console.log('success');
         },
         complete:function(){
             console.log("complete: saveAction");

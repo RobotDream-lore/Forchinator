@@ -82,7 +82,7 @@
                 </div>
 
                 <div class="col-md-6">
-                <form id="action-form">
+                <form id="action-form" style="width: 80%; margin-left: 10%;">
                     <div class="row">
                         <label for="name">Action Name</label>
                         <input type="text" style="width: 100%" id="name">
@@ -154,7 +154,7 @@
                     </div>
 
                     <div class="row">
-                        <button id="delete-action" class="btn btn-tag" type="button" style="width: 95%; font-size: 1.5em;">Delete Action</button>
+                        <button id="delete-action" class="btn btn-tag" type="button" style="width: 95%; font-size: 1.5em;" onclick="deleteAction()">Delete Action</button>
                     </div>
                 
                 </div>
@@ -179,17 +179,6 @@
                             <label for="drop-routines" style="margin-top: 20px;">Choose  the Routine to Edit</label>
                             <select id="drop-routines" class="form-control" >
                                 <option id="0">Select a Routine</option>
-                                <option id="1">Routine 1</option>
-                                
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col">
-                            <label for="drop_actions" style="margin-top: 20px;">Add an Action to the Routine</label>
-                            <select id="drop_actions" class="form-control" >
-                                <option id="0">Select Action</option>
                                 
                             </select>
                         </div>
@@ -209,7 +198,24 @@
                             </ul>                    
                         </div>         
                     </div> 
+
+                    <div class="row">
+                        <div class="col">
+                            <label for="drop_actions" style="margin-top: 20px;">Add an Action to the Routine</label>
+                            <select id="drop_actions" class="form-control" >
+                                <option id="0">Select Action</option>
+                                
+                            </select>
+                        </div>
+                    </div>
                     
+                    <div class="row">
+                        <div class="col">
+                            <label for="homing" style="margin-top: 20px;">Homing</label>
+                            <input type="number" min="0" max="100" value="0" id="homing" style="width: 100%; font-size: 1.5em;"></input>
+                        </div>
+                    </div>
+
                     <div class="row">
                         <div class="col">
                             <button id="try-routine" class="btn btn-tag" type="button" style="width: 90%; font-size: 1.5em;" onclick="fetchRoutine()">Try Routine</button>
@@ -224,7 +230,7 @@
     
                     <div class="row">
                         <div class="col">
-                            <button id="delete-routine" class="btn btn-tag" type="button" style="width: 90%; font-size: 1.5em;">Delete Routine</button>
+                            <button id="delete-routine" class="btn btn-tag" type="button" style="width: 90%; font-size: 1.5em;" onclick="deleteRoutine()">Delete Routine</button>
                         </div>
                     </div>
                 </div>
