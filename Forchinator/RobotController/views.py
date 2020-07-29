@@ -123,3 +123,4 @@ class SaveAction( LoginRequiredMixin, View):
                 else:
                     RobotPosition(**form.cleaned_data)
                 pass
+        return redirect('dashboard/')
