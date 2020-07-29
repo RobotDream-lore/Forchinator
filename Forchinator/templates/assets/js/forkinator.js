@@ -124,7 +124,7 @@ function fetchAction()
 function saveAction()
 {
     let _name;
-    var _action = [];
+    var _action = {};
     try{
         _name = document.getElementById('name');
         console.log(_name.value);
@@ -132,7 +132,7 @@ function saveAction()
 
         
 
-
+        var tmp = [];
         let form = document.getElementById("action-form");
         for(let i = 0; i <= form.length; i++)
         {
@@ -142,6 +142,7 @@ function saveAction()
 
             _action[_tmp_name] = _tmp_val;
         }
+        
         
     }catch(e){}
 
