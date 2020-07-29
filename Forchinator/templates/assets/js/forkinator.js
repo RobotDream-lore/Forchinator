@@ -17,8 +17,8 @@ function sendMotorChange()
     data_to_send.push(motor4.value);
 
     console.log(data_to_send);
-    
-    $.get('/dashboard/',{'data': data_to_send});
+
+    $.get('/dashboard/control/',{'data': data_to_send});
 
 }
 function fetchRoutineList()
