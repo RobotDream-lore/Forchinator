@@ -1,10 +1,12 @@
 //setup
+fetchRoutineList();
+fetchActionList();
 
 
 function fetchRoutineList()
 {
     $.ajax({
-        url: '/controller/routines/list.json',
+        url: '/dashboard/routines/list.json',
         dataType: 'json',
         type: 'get',
         success: function(data){
@@ -12,14 +14,29 @@ function fetchRoutineList()
             console.log(data);
         },
         complete:function(data){
-
+            console.log("complete: fetchRoutineList");
         }
     });
 }
-function fetchAction(name)
+function fetchRoutine()
 {
+    let _name;
+
+    try{
+        _name = document.getElementById('drop-routines');
+        //console.log(_name.value);
+        _name = _name.value;
+    } catch(e){}
+    
+    if(_name === undefined || _name === null) 
+    {
+        console.log("name is undefined or null");
+        console.log(_name);
+        return;
+    }
+    
     $.ajax({
-        url: '/controller/routines/watch/' + name ,
+        url: '/dashboard/routines/watch/' + _name ,
         dataType: 'json',
         type: 'get',
         success: function(data){
@@ -27,14 +44,27 @@ function fetchAction(name)
             console.log(data);
         },
         complete:function(data){
-
+            console.log("complete: fetchRoutine");
         }
     });
 }
-function saveRoutine(name)
+function saveRoutine()
 {
+    let _name;
+    try{
+        _name = document.getElementById('name');
+        //console.log(_name.value);
+        _name = _name.value;
+    }catch(e){}
+    if(_name === undefined || _name === null) 
+    {
+        console.log("name is undefined or null");
+        console.log(_name);
+        return;
+    }
+    
     $.ajax({
-        url: '/controller/routines/save/' + name ,
+        url: '/dashboard/routines/save/' + _name ,
         dataType: 'json',
         type: 'get',
         success: function(data){
@@ -42,7 +72,7 @@ function saveRoutine(name)
             console.log(data);
         },
         complete:function(data){
-
+            console.log("complete: saveRoutine");
         }
     });
 }
@@ -50,7 +80,7 @@ function saveRoutine(name)
 function fetchActionList()
 {
     $.ajax({
-        url: '/controller/actions/list.json',
+        url: '/dashboard/actions/list.json',
         dataType: 'json',
         type: 'get',
         success: function(data){
@@ -58,15 +88,28 @@ function fetchActionList()
             console.log(data);
         },
         complete:function(data){
-
+            console.log("complete: fetchActionList");
         }
     });
 }
 
-function fetchAction(name)
+function fetchAction()
 {
+    let _name;
+    try{
+        _name = document.getElementById('name');
+        //console.log(_name.value);
+        _name = _name.value;
+    }catch(e){}
+    if(_name === undefined || _name === null) 
+    {
+        console.log("name is undefined or null");
+        console.log(_name);
+        return;
+    }
+
     $.ajax({
-        url: '/controller/actions/watch/' + name,
+        url: '/dashboard/actions/watch/' + _name,
         dataType: 'json',
         type: 'get',
         success: function(data){
@@ -74,22 +117,65 @@ function fetchAction(name)
             console.log(data);
         },
         complete:function(data){
-
+            console.log("complete: fetchAction");
         }
     });
 }
-function saveAction(name)
+function saveAction()
 {
+    let _name;
+    var _action = [];
+    try{
+        _name = document.getElementById('name');
+        console.log(_name.value);
+        _name = _name.value;
+
+        
+
+
+        let form = document.getElementById("action-form");
+        for(let i = 0; i <= form.length; i++)
+        {
+            console.log(form[i].id + ": " + form[i].value);
+            let _tmp_name = form[i].id;
+            let _tmp_val = form[i].value;
+
+            _action[_tmp_name] = _tmp_val;
+        }
+        
+    }catch(e){}
+
+    
+
+
+
+    if(_name === undefined || _name === null) 
+    {
+        console.log("name is undefined or null");
+        console.log(_name);
+        return;
+    }
+
+    $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        }
+    });
+
     $.ajax({
-        url: '/controller/actions/save/' + name,
+        url: '/dashboard/actions/save',
         dataType: 'json',
-        type: 'get',
+        data: _action,
+        type: 'post',
         success: function(data){
             // Perform operation on return value
             console.log(data);
         },
-        complete:function(data){
-
+        complete:function(){
+            console.log("complete: saveAction");
+            console.log(_action);
         }
     });
 }
