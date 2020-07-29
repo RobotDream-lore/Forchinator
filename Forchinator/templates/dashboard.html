@@ -164,7 +164,19 @@
                 <div class="col-md-3">
                     <div class="row">
                         <div class="col">
-                            <label for="drop-routines">Choose  the Routine to Edit</label>
+                            <label for="routine-name">Routine Name</label>
+                            <input type="text" style="width: 100%;" id="routine-name">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <button id="save-routine" class="btn btn-tag" type="button" style="width: 90%; font-size: 1.5em;" onclick="addRoutine()">Add Routine</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="drop-routines" style="margin-top: 20px;">Choose  the Routine to Edit</label>
                             <select id="drop-routines" class="form-control" >
                                 <option id="0">Select a Routine</option>
                                 <option id="1">Routine 1</option>
@@ -175,7 +187,7 @@
 
                     <div class="row">
                         <div class="col">
-                            <label for="drop_actions">Add an Action to the Routine</label>
+                            <label for="drop_actions" style="margin-top: 20px;">Add an Action to the Routine</label>
                             <select id="drop_actions" class="form-control" >
                                 <option id="0">Select Action</option>
                                 
@@ -185,6 +197,8 @@
 
                     <div class="row">
                         <div class="col">
+                            <label for="routine" style="margin-top: 20px;">Sort the Actions</label>
+
                             <ul id="routine" class="list-group" style="width: 100%;">
                                 <div class="row">
                                     <div class="col">
@@ -204,7 +218,7 @@
 
                     <div class="row">
                         <div class="col">
-                            <button id="save-routine" class="btn btn-tag" type="button" style="width: 90%; font-size: 1.5em;">Save Routine</button>
+                            <button id="save-routine" class="btn btn-tag" type="button" style="width: 90%; font-size: 1.5em;" onclick="saveRoutine()">Save Routine</button>
                         </div>
                     </div>
     

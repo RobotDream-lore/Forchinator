@@ -66,11 +66,34 @@ function fetchRoutine()
         }
     });
 }
+function addRoutine()
+{
+    let _name;
+    try{
+        _name = document.getElementById('routine-name');
+        console.log(_name.value);
+        _name = _name.value;
+    }catch(e){}
+
+    $.ajax({
+        url: '/dashboard/routines/save/' + _name,
+        dataType: 'json',
+        type: 'get',
+        success: function(data){
+            // Perform operation on return value
+            console.log(data);
+        },
+        complete:function(data){
+            console.log("complete: fetchActionList");
+        }
+    });
+
+}
 function saveRoutine()
 {
     let _name;
     try{
-        _name = document.getElementById('name');
+        _name = document.getElementById('drop-routines');
         //console.log(_name.value);
         _name = _name.value;
     }catch(e){}
@@ -80,19 +103,9 @@ function saveRoutine()
         console.log(_name);
         return;
     }
-    
-    $.ajax({
-        url: '/dashboard/routines/save/' + _name ,
-        dataType: 'json',
-        type: 'get',
-        success: function(data){
-            // Perform operation on return value
-            console.log(data);
-        },
-        complete:function(data){
-            console.log("complete: saveRoutine");
-        }
-    });
+    let data_to_send = [];
+    data_to_send.push("52");
+    $.get('/dashboard/routines/save/' + _name + '/',{'data': data_to_send});
 }
 
 function fetchActionList()
