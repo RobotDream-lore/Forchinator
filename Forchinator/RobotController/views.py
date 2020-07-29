@@ -115,6 +115,9 @@ class SaveAction( LoginRequiredMixin, View):
             form = self.form_class(request.POST)
             if form.is_valid():
                 qs_rp = RobotPosition.objects.all().filter(name = form.cleaned_data['name'])
+                for k,v in form.cleaned_data.items():
+                    print(k)
+                    print(v)
                 if(qs_rp.exists()):
                     qs_rp.update(**form.cleaned_data)
                 else:
