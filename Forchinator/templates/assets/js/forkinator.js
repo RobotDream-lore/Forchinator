@@ -2,7 +2,25 @@
 fetchRoutineList();
 fetchActionList();
 
+function sendMotorChange()
+{
+    let data_to_send = [];
 
+    let motor1 = document.getElementById("motor1");
+    let motor2 = document.getElementById("motor2");
+    let motor3 = document.getElementById("motor3");
+    let motor4 = document.getElementById("motor4");
+
+    data_to_send.push(motor1.value);
+    data_to_send.push(motor2.value);
+    data_to_send.push(motor3.value);
+    data_to_send.push(motor4.value);
+
+    console.log(data_to_send);
+    
+    $.get('/dashboard/',{'data': data_to_send});
+
+}
 function fetchRoutineList()
 {
     $.ajax({
