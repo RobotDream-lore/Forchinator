@@ -20,7 +20,7 @@ class DoRealTimeControl( LoginRequiredMixin, View):
         if(request.is_ajax):
             command_to_send = request.GET.getlist('data[]')
             print(command_to_send)
-            return redirect('dashboard/')
+            return redirect('/dashboard/')
     
 
 class GetRoutines( LoginRequiredMixin, View):
@@ -63,11 +63,22 @@ class SaveRoutine( LoginRequiredMixin, View):
         data = request.GET.getlist('data[]')
         print(data)
         #Salva Routine
-        routine = RobotRoutine(name= routine_name, homing_freq = data[0], encoded_positions = data[1])
-        routine.save()
+        qs_rr = RobotRoutine.objects.all().filter(name = routine_name)
+        
+        if(qs_rr.exists()):
+            rr = qs_rr.first()
+            rr.homing_freq = data[0]
+            rr.encoded_positions = data[1]
+            rr.save()
+        
+        else:
+            routine = RobotRoutine(name= routine_name, homing_freq = data[0], encoded_positions = data[1])
+            routine.save()
+        
         if(len(data[1]) > 0):
             #Aggiungere le istanze position al many2many
             pass
+        
         return redirect('/dashboard/')
 
     def post(self,request,routine_name):
@@ -75,6 +86,18 @@ class SaveRoutine( LoginRequiredMixin, View):
             form = self.form_class(request.POST)
             if form.is_valid():
                 pass
+
+class DeleteRoutine( LoginRequiredMixin, View):
+    login_url = '/login/'
+    template = 'dashboard.html'
+    
+    def get(self,request,routine_name):
+        try:
+            rr = RobotRoutine.objects.all().get(name = routine_name)
+            rr.delete()
+        except:
+            pass
+        return redirect('/dashboard/')   
 
 class GetActions( LoginRequiredMixin, View):
     login_url = '/login/'
@@ -121,6 +144,19 @@ class SaveAction( LoginRequiredMixin, View):
                 if(qs_rp.exists()):
                     qs_rp.update(**form.cleaned_data)
                 else:
-                    RobotPosition(**form.cleaned_data)
+                    rp = RobotPosition(**form.cleaned_data)
+                    rp.save()
                 pass
-        return redirect('dashboard/')
+        return redirect('/dashboard/')
+
+class DeleteAction( LoginRequiredMixin, View):
+    login_url = '/login/'
+    template = 'dashboard.html'
+    
+    def get(self,request,action_name):
+        try:
+            rp = RobotPosition.objects.all().get(name = action_name)
+            rp.delete()
+        except:
+            pass
+        return redirect('/dashboard/') 

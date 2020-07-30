@@ -7,10 +7,10 @@ class PositionForm(forms.Form):
     motor3 = forms.IntegerField(label='motor3',required=True)
     motor4 = forms.IntegerField(label='motor4',required=True)
     speed = forms.IntegerField(label='speed',required=True)
-    algorithm = forms.CharField(max_length=30, label='algorithm',required=True)
-    ev_girare = forms.BooleanField(label='ev_girare',required=True)
-    ev_succhiare = forms.BooleanField(label='ev_succhiare',required=True)
-    sensore1_hold = forms.BooleanField(label='sensor1_hold',required=True)
-    sensore2_hold = forms.BooleanField(label='sensore2_hold',required=True)
     startup_delay = forms.IntegerField(label='startup_delay',required=True)
+    #ev_girare = forms.BooleanField(label='ev_girare',required=True)
+    #ev_succhiare = forms.BooleanField(label='ev_succhiare',required=True)
+    #sensore1_hold = forms.BooleanField(label='sensor1_hold',required=True)
+    #sensore2_hold = forms.BooleanField(label='sensore2_hold',required=True)
+    
 
