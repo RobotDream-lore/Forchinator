@@ -5,8 +5,8 @@ fetchActionList();
 
 function toggle(el)
 {
-    if(el.value==='true') el.value = 'false'; 
-    else if(el.value==='false' || el.value==='on') el.value = 'true';
+    if(el.value==='1') el.value = ''; 
+    else if(el.value==='' || el.value==='on') el.value = '1';
 
     //console.log(el.value);
 }
@@ -313,9 +313,9 @@ function saveAction()
             let _tmp_name = form[i].id;
             let _tmp_val = form[i].value;
             
-            if(_tmp_val === 'undefined') _tmp_val='';
-            else if(_tmp_val ==='') _tmp_val = 0;
-            else if(_tmp_val ==='on') _tmp_val = 'false';
+            if(_tmp_val === 'undefined') _tmp_val='a';
+            else if(_tmp_val ==='') _tmp_val = 'a';
+            else if(_tmp_val ==='on') _tmp_val = 'a';
             _action[_tmp_name] = _tmp_val;
         }
         

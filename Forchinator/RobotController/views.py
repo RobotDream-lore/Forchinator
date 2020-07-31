@@ -137,7 +137,9 @@ class SaveAction( LoginRequiredMixin, View):
     def post(self,request):
         if(request.is_ajax):
             form = self.form_class(request.POST)
+            print(request.POST)
             if form.is_valid():
+                print('Fatto')
                 qs_rp = RobotPosition.objects.all().filter(name = form.cleaned_data['name'])
                 for k,v in form.cleaned_data.items():
                     print(k)
