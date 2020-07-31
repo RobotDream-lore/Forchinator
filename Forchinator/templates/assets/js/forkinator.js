@@ -5,8 +5,8 @@ fetchActionList();
 
 function toggle(el)
 {
-    if(el.value==='1') el.value = ''; 
-    else if(el.value==='' || el.value==='on') el.value = '1';
+    if(el.value==='True') el.value = 'False'; 
+    else if(el.value==='False' || el.value==='on') el.value = 'True';
 
     //console.log(el.value);
 }
@@ -89,6 +89,7 @@ function fetchRoutine(_name)
 }
 function decodeActionOrder(msg)
 {
+    if(msg === '') return;
     let actions = msg.split('-');
 
     for(let i = 0; i < actions.length; i++)
@@ -125,7 +126,7 @@ function encodeActionOrder()
         if(i < items.length-1) msg += '-';
     }
 
-    //console.log(msg);
+    console.log(msg);
     return msg;
 }
 
@@ -145,13 +146,17 @@ function saveRoutine()
         data_to_send.push(_homing);
         data_to_send.push(encodeActionOrder());
 
-    }catch(e){}
+    }catch(e){
+        console.log("errore");
+        return;
+    }
     if(_name === undefined || _name === null) 
     {
         console.log("name is undefined or null");
         console.log(_name);
         return;
     }
+    console.log(data_to_send)
     
     $.get('/dashboard/routines/save/' + _name + '/',{'data': data_to_send}, console.log("complete: save Routine"));
 }
@@ -313,9 +318,9 @@ function saveAction()
             let _tmp_name = form[i].id;
             let _tmp_val = form[i].value;
             
-            if(_tmp_val === 'undefined') _tmp_val='a';
-            else if(_tmp_val ==='') _tmp_val = 'a';
-            else if(_tmp_val ==='on') _tmp_val = 'a';
+            if(_tmp_val === 'undefined') _tmp_val='';
+            else if(_tmp_val ==='') _tmp_val = '0';
+            else if(_tmp_val ==='on' || _tmp_val === 'False') continue;
             _action[_tmp_name] = _tmp_val;
         }
         
