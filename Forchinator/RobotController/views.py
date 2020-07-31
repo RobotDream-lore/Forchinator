@@ -70,22 +70,23 @@ class SaveRoutine( LoginRequiredMixin, View):
             rr.homing_freq = data[0]
             rr.encoded_positions = data[1]
             rr.save()
+            for r in rr.positions.all():
+                rr.positions.remove(r)
         
         else:
-            routine = RobotRoutine(name= routine_name, homing_freq = data[0], encoded_positions = data[1])
-            routine.save()
+            rr = RobotRoutine(name= routine_name, homing_freq = data[0], encoded_positions = data[1])
+            rr.save()
         
         if(len(data[1]) > 0):
-            #Aggiungere le istanze position al many2many
-            pass
+            for pos in data[1].split('-'):
+                qs_pos = RobotPosition.objects.all().filter(name = pos)
+                if(qs_pos.exists()):
+                    rr.positions.add(qs_pos)
+                    rr.save()
+
         
         return redirect('/dashboard/')
 
-    def post(self,request,routine_name):
-        if(request.is_ajax):
-            form = self.form_class(request.POST)
-            if form.is_valid():
-                pass
 
 class DeleteRoutine( LoginRequiredMixin, View):
     login_url = '/login/'
@@ -157,6 +158,19 @@ class DeleteAction( LoginRequiredMixin, View):
         try:
             rp = RobotPosition.objects.all().get(name = action_name)
             rp.delete()
+        except:
+            pass
+        return redirect('/dashboard/') 
+
+
+class TryAction( LoginRequiredMixin, View):
+    login_url = '/login/'
+    template = 'dashboard.html'
+    
+    def get(self,request,action_name):
+        try:
+            rp = RobotPosition.objects.all().get(name = action_name)
+            #Send message to try it
         except:
             pass
         return redirect('/dashboard/') 
