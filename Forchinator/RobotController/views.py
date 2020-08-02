@@ -81,7 +81,7 @@ class SaveRoutine( LoginRequiredMixin, View):
             for pos in data[1].split('-'):
                 qs_pos = RobotPosition.objects.all().filter(name = pos)
                 if(qs_pos.exists()):
-                    rr.positions.add(qs_pos)
+                    rr.positions.add(qs_pos.first())
                     rr.save()
 
         
