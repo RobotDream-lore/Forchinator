@@ -160,7 +160,11 @@ function fetchRoutine(_name)
         success: function(data){
             // Perform operation on return value
             console.log(data);
+
+            
             try{
+                let _input = document.getElementById("homing");
+                _input.value = data[1];
                 decodeActionOrder(data[2]);
             }catch(e){}
         },
@@ -173,6 +177,17 @@ function decodeActionOrder(msg)
 {
     if(msg === '') return;
     let actions = msg.split('-');
+
+    let _action_list = document.getElementById('actions-list');
+    let len = _action_list.children.length;
+
+    console.log(len);
+    for(let i = len; i > 0; i--)
+    {
+        _action_list.children[i-1].remove();
+        console.log(i-1);
+    }
+
 
     for(let i = 0; i < actions.length; i++)
     {
