@@ -10,11 +10,12 @@ class RobotPosition(models.Model):
      motor3 = models.IntegerField(default = 0) 
      motor4 = models.IntegerField(default = 0)
      speed = models.IntegerField(default = 0) 
-     ev_girare = models.BooleanField(default = False)
-     ev_succhiare = models.BooleanField(default = False)
+     startup_delay = models.IntegerField(default = 0)
      sensor1_hold = models.BooleanField(default = False)
      sensor2_hold = models.BooleanField(default = False)
-     startup_delay = models.IntegerField(default = 0)
+     ev_succhiare = models.BooleanField(default = False)
+     ev_girare = models.BooleanField(default = False)
+     
 
      def __str__(self):
          return self.name

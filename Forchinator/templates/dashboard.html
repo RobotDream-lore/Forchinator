@@ -6,7 +6,7 @@
     <head >
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=yes">
-        <title>Giuditta 0.1</title>
+        <title>Forchinator</title>
         <link rel="stylesheet" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}">
         <link rel="stylesheet" href="{% static 'assets/css/styles.css'%}">
         <link rel="stylesheet" href="{% static 'assets/css/input.css'%}">
@@ -69,87 +69,91 @@
         <div class="container-fluid" style="margin-top: 80px;">
         
             <div class="row">     
-                <div class="col-md-3">
-                    <div class="row">
-                        <div class="col">
-                            <label for="drop-routines" style="margin-top: 20px;">Choose  the Routine to Edit</label>
-                            <select id="drop-routines" class="form-control" >
-                                <option id="0">Select a Routine</option>
-                                
-                            </select>
+                <div class="col-md-3" >
+                    <div style="width: 94%; margin-left: 3%;">
+                        <div class="row">
+                            <div class="col">
+                                <label for="drop-routines" style="margin-top: 20px;">Choose  the Routine to Edit</label>
+                                <select id="drop-routines" class="form-control" >
+                                    <option id="0">Select a Routine</option>
+                                    
+                                </select>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col">
-                            <label for="routine-name">Routine Name</label>
-                            <input type="text" style="width: 100%;" id="routine-name">
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col">
-                            <button id="save-routine" class="btn btn-tag" type="button" style="width: 90%; font-size: 1.5em;" onclick="addRoutine()">Add Routine</button>
-                        </div>
-                    </div>
-                    
-
-                    
-                    
-                    <div class="row">
-                        <div class="col">
-                            <label for="homing" style="margin-top: 20px;">Homing</label>
-                            <input type="number" min="0" max="100" value="0" id="homing" style="width: 100%; font-size: 1.5em;"></input>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col">
-                            <button id="try-routine" class="btn btn-tag" type="button" style="width: 90%; font-size: 1.5em;" onclick="fetchRoutine()">Try Routine</button>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col">
-                            <button id="save-routine" class="btn btn-tag" type="button" style="width: 90%; font-size: 1.5em;" onclick="saveRoutine()">Save Routine</button>
-                        </div>
-                    </div>
     
-                    <div class="row">
-                        <div class="col">
-                            <button id="delete-routine" class="btn btn-tag" type="button" style="width: 90%; font-size: 1.5em;" onclick="deleteRoutine()">Delete Routine</button>
+                        <div class="row">
+                            <div class="col">
+                                <label for="routine-name">Routine Name</label>
+                                <input type="text" style="width: 100%;" id="routine-name">
+                            </div>
+                        </div>
+    
+    
+                        <div class="row">
+                            <div class="col">
+                                <button id="save-routine" class="btn btn-tag" type="button" style="width: 100%; font-size: 1.25em" onclick="addRoutine()">Add Routine</button>
+                            </div>
+                        </div>
+                        
+    
+                        
+                        
+                        <div class="row">
+                            <div class="col">
+                                <label for="homing" style="margin-top: 20px;">Homing</label>
+                                <input type="number" min="0" max="100" value="0" id="homing" style="width: 100%; font-size: 1.5em;"></input>
+                            </div>
+                        </div>
+    
+                        <div class="row">
+                            <div class="col">
+                                <button id="try-routine" class="btn btn-tag" type="button" style="width: 100%; font-size: 1.25em" onclick="tryRoutine()">Try Routine</button>
+                            </div>
+                        </div>
+    
+                        <div class="row">
+                            <div class="col">
+                                <button id="save-routine" class="btn btn-tag" type="button" style="width: 100%; font-size: 1.25em" onclick="saveRoutine()">Save Routine</button>
+                            </div>
+                        </div>
+        
+                        <div class="row">
+                            <div class="col">
+                                <button id="delete-routine" class="btn btn-tag" type="button" style="width: 100%; font-size: 1.25em" onclick="deleteRoutine()">Delete Routine</button>
+                            </div>
                         </div>
                     </div>
                 </div>
                 
 
                 <div class="col-md-3">
-                    
-                    <div class="row">
-                        <div class="col">
-                            <label for="drop_actions" style="margin-top: 20px;">Add an Action to the Routine</label>
-                            <select id="drop_actions" class="form-control">
-                                <option value="" selected>Select an Action</option> 
-                            </select>
+                    <div style="width: 94%; margin-left: 3%;">
+                        <div class="row">
+                            <div class="col">
+                                <label for="drop_actions" style="margin-top: 20px;">Add an Action to the Routine</label>
+                                <select id="drop_actions" class="form-control">
+                                    <option value="" selected>Select an Action</option> 
+                                </select>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col">
-                            <button id="new-action" class="btn btn-tag" type="button" style="width: 90%; font-size: 1.5em;" onclick="addAction('NewAction')">New Action</button>
+    
+                        <div class="row">
+                            <div class="col">
+                                <button id="new-action" class="btn btn-tag" type="button" style="width: 100%; font-size: 1.25em" onclick="addAction('NewAction')">New Action</button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <label for="action--list">List of Actions:</label>
-                            <ul id="actions-list" class="list-group" style="width: 100%;">                        
-                            </ul> 
+                        <div class="row">
+                            <div class="col">
+                                <label for="action--list" style="margin-top: 20px;">List of Actions:</label>
+                                <ul id="actions-list" class="list-group" style="width: 100%;">                        
+                                </ul> 
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-md-6">
-                <form id="action-form" style="width: 80%; margin-left: 10%;">
+                <form id="action-form" style="width: 94%; margin-left: 3%;">
                     <div class="row">
                         <label for="name">Action Name</label>
                         <input type="text" style="width: 100%" id="name">
@@ -211,18 +215,21 @@
                     
                 </form>
 
-
+                <div style="width: 94%; margin-left: 3%;">
                     <div class="row">
-                        <button id="try-action" class="btn btn-tag" type="button" style="width: 95%; font-size: 1.5em" onclick="fetchAction()">Try Action</button>
+                        <button id="try-action" class="btn btn-tag" type="button" style="width: 100%; font-size: 1.25em" onclick="tryAction()">Try Action</button>
                     </div>
     
                     <div class="row">
-                        <button id="save-action" class="btn btn-tag" type="button" style="width: 95%; font-size: 1.5em;" onclick="saveAction()">Save Action</button>
+                        <button id="save-action" class="btn btn-tag" type="button" style="width: 100%; font-size: 1.25em" onclick="saveAction()">Save Action</button>
                     </div>
 
                     <div class="row">
-                        <button id="delete-action" class="btn btn-tag" type="button" style="width: 95%; font-size: 1.5em;" onclick="deleteAction()">Delete Action</button>
+                        <button id="delete-action" class="btn btn-tag" type="button" style="width: 100%; font-size: 1.25em" onclick="deleteAction()">Delete Action</button>
                     </div>
+                </div>
+
+                    
                 
                 </div>
 
@@ -243,6 +250,8 @@
                 $( "#actions-list" ).sortable();
                 $( "#actions-list" ).disableSelection();
             } );
+
+            pageSetup();
         </script>
 
 
