@@ -23,6 +23,14 @@ class DoRealTimeControl( LoginRequiredMixin, View):
             return redirect('/dashboard/')
     
 
+class TryRoutine( LoginRequiredMixin, View):
+    login_url = '/login/'
+    template = 'dashboard.html'
+
+    def get(self,request,routine_name):
+        if(request.is_ajax):
+            return redirect('/dashboard/') 
+
 class GetRoutines( LoginRequiredMixin, View):
     login_url = '/login/'
     template = 'dashboard.html'
@@ -111,6 +119,18 @@ class GetActions( LoginRequiredMixin, View):
             for d in qs_rp:
                 data.append(d.name)
             return JsonResponse(data = data,safe = False)
+
+
+
+class TryAction( LoginRequiredMixin, View):
+    login_url = '/login/'
+    template = 'dashboard.html'
+
+    def get(self,request, action_name):
+        if(request.is_ajax):
+            return redirect('/dashboard/') 
+
+
 
 class GetAction( LoginRequiredMixin, View):
     login_url = '/login/'
