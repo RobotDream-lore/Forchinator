@@ -100,14 +100,14 @@
                         
                         <div class="row">
                             <div class="col">
-                                <label for="homing" style="margin-top: 20px;">Homing</label>
-                                <input type="number" min="0" max="100" value="0" id="homing" style="width: 100%; font-size: 1.5em;"></input>
+                                <label hidden for="homing" style="margin-top: 20px;">Homing</label>
+                                <input hidden type="number" min="0" max="100" value="0" id="homing" style="width: 100%; font-size: 1.5em;"></input>
                             </div>
                         </div>
     
                         <div class="row">
                             <div class="col">
-                                <button id="try-routine" class="btn btn-tag" type="button" style="width: 100%; font-size: 1.25em" onclick="tryRoutine()">Try Routine</button>
+                                <button id="try-routine" class="btn btn-tag" type="button" style="width: 100%; font-size: 1.25em" onclick="tryRoutine()">Load Routine</button>
                             </div>
                         </div>
     
@@ -149,6 +149,11 @@
                                 </ul> 
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col">
+                                <button id="remove-last" class="btn btn-tag" type="button" style="width: 100%; font-size: 1.25em" onclick="removeLast()">Remove Last</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -162,22 +167,22 @@
 
                     <div class="row" >
                             <label for="motor1">Motor One Steps</label>
-                            <input type="number" min="0" max="10000" value="0" id="motor1" style="width: 100%" onchange="sendMotorChange()"></input>
+                            <input type="number" min="0" max="25600" value="0" id="motor1" style="width: 100%" onchange="sendMotorChange()"></input>
                     </div>
         
                     <div class="row">
                         <label for="motor2">Motor Two Steps</label>
-                        <input type="number" min="0" max="10000" value="0" id="motor2" style="width: 100%" onchange="sendMotorChange()"></input>
+                        <input type="number" min="0" max="6400" value="0" id="motor2" style="width: 100%" onchange="sendMotorChange()"></input>
                     </div>
     
                     <div class="row">
                         <label for="motor3">Motor Three Steps</label>
-                        <input type="number" min="0" max="10000" value="0" id="motor3" style="width: 100%" onchange="sendMotorChange()"></input>
+                        <input type="number" min="0" max="32000" value="0" id="motor3" style="width: 100%" onchange="sendMotorChange()"></input>
                     </div>
     
                     <div class="row">
                         <label for="motor4">Motor Four Steps</label>
-                        <input type="number" min="0" max="10000" value="0" id="motor4" style="width: 100%" onchange="sendMotorChange()"></input>
+                        <input type="number" min="0" max="16000" value="0" id="motor4" style="width: 100%" onchange="sendMotorChange()"></input>
                     </div>
 
     
@@ -188,7 +193,7 @@
     
                     <div class="row">
                         <label for="startup_delay">Delay</label>
-                        <input type="number" min="0" max="100" value="0" id="startup_delay" style="width: 100%"></input>
+                        <input type="number" min="0" max="10000" value="0" id="startup_delay" style="width: 100%"></input>
                     </div>
                 
                     <div class="row">

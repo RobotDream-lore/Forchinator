@@ -2,7 +2,18 @@
 fetchRoutineList();
 fetchActionList();
 
-
+function removeLast()
+{
+    let _action_list;
+    let len;
+    try{
+    _action_list = document.getElementById('actions-list');
+    len = _action_list.children.length;
+    _action_list.children[len-1].remove();
+    }catch(e){}
+    
+    console.log(len);
+}
 function tryRoutine()
 {
     let routine_name;
@@ -281,6 +292,7 @@ function deleteRoutine()
             console.log("delete routine Success");
         },
         complete:function(){
+            location.reload();
             console.log("complete: delete routine");
         }
     });
@@ -310,6 +322,7 @@ function deleteAction()
             console.log("delete action Success");
         },
         complete:function(){
+            location.reload();
             console.log("complete: delete action");
         }
     });
