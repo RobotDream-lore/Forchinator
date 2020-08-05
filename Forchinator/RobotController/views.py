@@ -5,6 +5,8 @@ from django.views import View
 from .forms import PositionForm
 from .models import RobotPosition, RobotRoutine
 from django.forms.models import model_to_dict
+from .i2cProtocol_utils import *
+import RPi.GPIO as GP
 
 class DisplayController( LoginRequiredMixin, View):
     login_url = '/login/'
@@ -19,7 +21,14 @@ class DoRealTimeControl( LoginRequiredMixin, View):
     def get(self,request):
         if(request.is_ajax):
             command_to_send = request.GET.getlist('data[]')
+            
+            for i,v in enumerate(command_to_send):
+                command_to_send[i] = int(v)
             print(command_to_send)
+            try:
+                send_motor_values(command_to_send)
+            except:
+                arduino_reset()
             return redirect('/dashboard/')
     
 
@@ -29,6 +38,22 @@ class TryRoutine( LoginRequiredMixin, View):
 
     def get(self,request,routine_name):
         if(request.is_ajax):
+            rr_qs = RobotRoutine.objects.all().filter(name=routine_name)
+            if(rr_qs.exists()):
+                send_clear_routine()
+                time.sleep(0.8)
+                for a in rr_qs.first().positions.all():
+                    to_send = []
+                    for k,v in model_to_dict(a).items():
+                        if(k == 'id' or k=='name'):
+                            pass
+                        else:
+                            to_send.append(v)
+                    try:
+                        send_add_position_to_routine(to_send)
+                        time.sleep(0.1)
+                    except:
+                        arduino_reset()
             return redirect('/dashboard/') 
 
 class GetRoutines( LoginRequiredMixin, View):
@@ -122,13 +147,6 @@ class GetActions( LoginRequiredMixin, View):
 
 
 
-class TryAction( LoginRequiredMixin, View):
-    login_url = '/login/'
-    template = 'dashboard.html'
-
-    def get(self,request, action_name):
-        if(request.is_ajax):
-            return redirect('/dashboard/') 
 
 
 
@@ -190,9 +208,25 @@ class TryAction( LoginRequiredMixin, View):
     template = 'dashboard.html'
     
     def get(self,request,action_name):
+        #try:
+        rp = RobotPosition.objects.all().get(name = action_name)
+        to_send = []
+        for k,v in model_to_dict(rp).items():
+            if(k == 'id' or k == 'name'):
+                pass
+            else:
+                to_send.append(v)
         try:
-            rp = RobotPosition.objects.all().get(name = action_name)
-            #Send message to try it
+            send_try_position(to_send)
         except:
-            pass
-        return redirect('/dashboard/') 
+            arduino_reset()
+        return redirect('/dashboard/')
+
+def arduino_reset():
+    GP.setwarnings(False)
+    GP.setmode(GP.BCM)
+    GP.setup(12, GP.OUT)
+    GP.output(12, GP.LOW)
+    time.sleep(0.05)
+    GP.output(12, GP.HIGH)
+    time.sleep(0.5)
